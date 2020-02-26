@@ -1,7 +1,7 @@
 # PETools
 Tools to analyse and visualise ordinal data using Permutation Entropy
 
-## Introduction
+## 1. Introduction
 Permutation entropy (PE) is a statistic applicable to ordered (indexed) data sets [1]. PE is similar to the Shannon entropy [2], except symbols are encoded based on the *relative ordering* of data values, rather than the data values themselves. Symbols are therefore interpreted as representations of *dynamical states* - or more colloquially, patterns made by neighbouring points. The PE therefore is a measure of how evenly represented these dynamical states are in a data set, or the level of predictability in the dynamical state of the probabilistic machine/system that produced the data.
 
 Permutation entropy is a popular statistical measure for complex-structured data, as it is
@@ -28,29 +28,44 @@ There are a number of caveats to address in this simplex example. Firstly, what 
 
 Secondly, some readers might question why we don't re-use data elements, i.e. why we don't group the data as {0, 1}, {1, 0.1}, {0.5, 1.2}... It is certainly possible to compute the PE grouping substrings this way (and it is included as a user-option in the `OrdEncode` function. In fact, this "overlapping" approach is arguably more common in the literature as on the surface it yields more symbols, and thus better statistical certainty. But there is a hidden cost - overlapping subsets introduce spurious *correlations* between symbols, which can greatly complicate further statistical analysis [3]. This issue is fairly nuanced and will be covered further in depth later on, but **it is recommended that, unless there is a compelling reason to do so, substrings should not overlap when grouping**. 
 
-Next, readers may have noted that the case where x(0) == x(1) was not explicitly handled. It is generally assumed for continuous data that equalities of this nature are not possible (justified on the basis of measure theory), and that equalities if they do arise are due to inadvertent quantisation or rounding. Some authors will map equalities to a specific symbol (i.e. they will include an "or equals to" in one of the above conditions), however this method is inherently biased. A better (but not perfect) approach is to assign equalities randomly among eligible candidates. In this release this is implemeneted by **adding a vanishingly small amount of Gaussian white noise to each data element**.
+Next, readers may have noted that the case where x(0) == x(1) was not explicitly handled. It is generally assumed for continuous data that equalities of this nature are not possible (justified on the basis of measure theory), and that equalities if they do arise are due to inadvertent quantisation or rounding. Some authors will map equalities to a specific symbol (i.e. they will include an "or equals to" in one of the above conditions), however this method is inherently biased. A better (but not perfect) approach is to assign equalities randomly among eligible candidates. In the `OrdEncode` function this is implemeneted by **adding a vanishingly small amount of Gaussian white noise to each data element**.
 
 Finally, what if the length of the original data set does not neatly fit into groups of D? What if our original data had 11 elements instead of 12? Quite simply, the excess symbols are dropped entirely and are not used in the calculation. Only the first D * floor(length(y)/D) data elements are used (not factoring in embedding delays > 1).
 
 #### Embedding Delay
 A further useful user parameter is the *embedding delay* which is defined as the number of indices separating the data elements in each subgrouping. Varying the embedding delay can be colloquially thought of as "probing" for patterns at different scales (time scales or otherwise). For example with an embedding delay (or "tau") or 2, the grouping in our above example would be {0, 0.1}, {1.2, 1.5}, {1.7, 1.5} and {1, 0.5}, {0.4, 2.0}, {1.2, 100}, giving {2, 2, 1} and {1, 2, 2} as the symbol strings. Note here the output string has been subdivided into 2, one for the odd-indexed elements and one for the even-indexed elements (generally the mod(tau) indexed elements). Semantically, this is expressed in the `OrdEncode` function as {2, 2, 1, 0, 1, 2, 2} with the zero indicating a break between sets. This is done to expedite the analysis of correlations between symbols, and does not affect the computation of the PE overall.
 
-## Definitions
+## 2. Definitions
 ### Permutation Entropy
 In this section, we will take the ideas introduced in the previous section and place them on a firmer mathematical footing. The (normalised) permutation entropy (or just PE for short) is computed as
 
-*H*<sub>est</sub>(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> (*p*<sub>*i*</sub>/*N*)log(*p*<sub>*i*</sub>/*N*)
+(1.1) *H*<sub>est</sub>(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> (*p*<sub>*i*</sub>/*N*)log(*p*<sub>*i*</sub>/*N*)
 
-where *D* is the embedding dimension, *N* denotes the total number of symbols, *p*<sub>*i*</sub> denote counts of the *i*th symbol, and the summation is over the complete set of symbols, *i* &isin; *s*. The "est" subscript denotes an estimated PE, which will be discussed in the next section below. Note that as a consequence of the limit of *x*log(*x*) being 0 as *x* &rarr; 0, empty (zero) counts can be safely removed from the summation. It is noted explicitly that the PE is a funtion of the embedding dimension as well as *D*, as it is common in PE analysis to compute *H* as a function of *&\tau;*, though it should also be remarked that there is an overall dependence on how the data elements are mapped to the groups before encoding and things like e.g. whether there is overlap in sub-groupings are reliant on context, so it is imperative that these details are noted for the purposes of reproducibility.
+where *D* is the embedding dimension, *N* denotes the total number of symbols, *p*<sub>*i*</sub> denote counts of the *i*th symbol, and the summation is over the complete set of symbols, *i* &isin; *s*. The symbols are assigned to each data subgroup based on which permutation of {1:*D*!} matches the condition
+
+*x*<sub>1</sub> < *x*<sub>2</sub> < ... < *x*<sub>*D*!</sub>,
+
+for the given group. Note here the subscripts refer to indices *within the subgroup*, not the indices of the original full data set.
+
+The "est" subscript in equation 1.1 denotes this to be an estimated PE, which will be discussed in the next section below. Note that as a consequence of the limit of *x*log(*x*) being 0 as *x* &rarr; 0, empty (zero) counts can be safely removed from the summation. It is noted explicitly that the PE is a funtion of the embedding dimension as well as *D*, as it is common in PE analysis to compute *H* as a function of *&\tau;*, though it should also be remarked that there is an overall dependence on how the data elements are mapped to the groups before encoding and things like e.g. whether there is overlap in sub-groupings are reliant on context, so it is imperative that these details are noted for the purposes of reproducibility.
 
 ### Interpretation of Permutation Entropy
-It is possible to define both the PE of the input ordinal data, and the PE of the machine/system that generated the ordinal data. The former is a *deterministic* interpretation, while the latter must be regarded as a *probabilistic* interpretation. Unfortunately, these two interpretations are often conflated in scientific literature, so knowing how to navigate this nuance is an important step toward achieving mastery of PE as an analytical tool.
+It is possible to define both the PE of the input ordinal data, and the PE of the machine/system that generated the ordinal data. The former is a *deterministic* interpretation, while the latter must be regarded as a *probabilistic* interpretation. Unfortunately, these two interpretations are often conflated in scientific literature.
 
 The connection between the deterministic/probabilistic interpretations of PE is nothing more than the connection between the statsitics of a data set, and a sampled subset of the original set. In general the sample mean will *not* equal the true mean, the sample variance will not equal the true variance, etc. The sampled subset can be used to make inferences about the larger data set, but not with infinite precision. So it is with permutation entropy: we can use the PE of the ordinal data to make inferences of the machine/system that generated it, but not with infinite precision.
 
 The permuation entropy of the machine/system (hereafter referred to as the *true* permutation entropy) is given by
 
-*H*(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> *P*<sub>*i*</sub>log(*P*<sub>*i*</sub>)
+(1.2) *H*(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> *P*<sub>*i*</sub>log(*P*<sub>*i*</sub>),
+
+which depend on *P*<sub>*i*</sub>, the *probability* of obtaining the symbol corresponding to the label *i*. Note that this is *not* equivalent to the formula above, since *p*<sub>*i*</sub>/*N* will not equal *P*<sub>*i*</sub> due to sampling error. Equation 1.1 is therefore an *estimator* for the "true" permutation entropy, equation 1.2. It is this nuance that many users fail to navigate, leading to errors in analysis. As PE is often used in inference testing e.g. to detect changes in the probabilistic output of a machine/system, knowing how to calculate the precision of a PE estimate is critical, especially in instances where the amount of available data is limited.
+
+### Embedding Dimension
+The size of the subsets the ordinal data is divided into before the encoding step of the calculation. Incidentally, the name *permutation entropy* derives from the fact that each ordinal pattern (or *dynamical state*, to borrow the language used earlier) corresponds to a permutation of the string {1:D}, thus there are *D*! possible dynamic states to be summed over.
+
+Because the number of dynamic states increases rapidly with increasing *D*, the recommended range of this parameter is quite narrow. In the `OrdEncode` function, this will return an error message unless 2 <= *D* <= 8. Not only do higher *D* natively require more computation time due to the increased number of inequality operations that need to be performed, they also need a longer input data string to establish an equivalent level of statistical precision (which blows out computation times even further). It is generally rare to see meaningful patterns detected in data that cannot be seen using D <= 5. It is therefore strongly recommended to remain within these bounds.
+
+So given all this, what is the most appropriate *D* to use for a given data set (in addition to the above considerations pertaining to computation time)? The benefit of using higher *D* is the ability to spot more complex patterns in the input data. Consider an input string with four data points - using *D* = 2 gives two patterns, each with two possible outcomes, so 4 possible outcomes in total. Using *D* = 4 on the other hand yields 24 possible outcomes. The general rule of thumb is to make *D* large enough to spot any patterns of interest, but no higher since the costs rapidly outweight the benefits of having a higher *D*. Of course, knowing which *D* will spot the patterns of interest will initially require some exploration. A good habit in PE analysis is to derive what insights you can from low *D* values before progressively working your way to higher *D*. Analyses at lower *D* can also help provide context for outputs at higher *D*, which can sometimes be tricky to analyse in the absence of this context.
 
 
 #### References
