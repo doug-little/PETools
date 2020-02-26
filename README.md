@@ -38,7 +38,7 @@ A further useful user parameter is the *embedding delay* which is defined as the
 ## Definitions
 In this section, we will take the ideas introduced in the previous section and place them on a firmer mathematical footing. The permutation entropy is defined as
 
-log(D!)<sup>-1</sup> &Sigma; p<sub>i</sub>log(p<sub>1</sub>)
+log(D!)<sup>-1</sup> &Sigma<sub>s</sub>; p<sub>i</sub>log(p<sub>i</sub>)
 
 
 #### References
