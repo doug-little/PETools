@@ -2,7 +2,8 @@
 Tools to analyse and visualise ordinal data using Permutation Entropy
 
 ## Introduction
-Permutation entropy is a statistic applicable to ordered (indexed) data sets [1].
+Permutation entropy (PE) is a statistic applicable to ordered (indexed) data sets [1]. PE is similar to the Shannon entropy [2], except symbols are encoded based on the *relative ordering* of data values, rather than the data values themselves. Symbols are therefore interpreted as representations of *dynamical states* - or more colloquially, patterns made by neighbouring points. The PE therefore is a measure of how evenly represented these dynamical states are in a data set, or the level of predictability in the dynamical state of the probabilistic machine/system that produced the data.
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
+2. C.E. Shannon, W. Weaver, The Mathematical Theory of Communication (1949), Univ of Illinois Press.
