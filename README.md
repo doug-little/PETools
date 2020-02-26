@@ -36,9 +36,9 @@ Finally, what if the length of the original data set does not neatly fit into gr
 A further useful user parameter is the *embedding delay* which is defined as the number of indices separating the data elements in each subgrouping. Varying the embedding delay can be colloquially thought of as "probing" for patterns at different scales (time scales or otherwise). For example with an embedding delay (or "tau") or 2, the grouping in our above example would be {0, 0.1}, {1.2, 1.5}, {1.7, 1.5} and {1, 0.5}, {0.4, 2.0}, {1.2, 100}, giving {2, 2, 1} and {1, 2, 2} as the symbol strings. Note here the output string has been subdivided into 2, one for the odd-indexed elements and one for the even-indexed elements (generally the mod(tau) indexed elements). Semantically, this is expressed in the `OrdEncode` function as {2, 2, 1, 0, 1, 2, 2} with the zero indicating a break between sets. This is done to expedite the analysis of correlations between symbols, and does not affect the computation of the PE overall.
 
 ## Definitions
-In this section, we will take the ideas introduced in the previous section and place them on a firmer mathematical footing. The permutation entropy is defined as \n
+In this section, we will take the ideas introduced in the previous section and place them on a firmer mathematical footing. The permutation entropy is defined as
 
-h<sub>&theta;</sub>(x) = &theta;<sub>o</sub> x + &theta;<sub>1</sub>x
+log(D!)<sup>-1</sup> &Sigma; p<sub>i</sub>log(p<sub>1</sub>)
 
 
 #### References
