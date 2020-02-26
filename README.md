@@ -21,6 +21,8 @@ To highlight the basic idea of this process, it is instructive to look at a simp
 * {1.7, 1.2}
 * {1.5, 100}
 
+Markup :  `code()`
+
 Next, we classify each group (or *substring*) in the following way. If x(0) > x(1) we assign the symbol "0" (or Heads), or if x(1) < x(0) we instead assign the symbol "1" (or Tails). This gives us the encoded symbol string {1, 1, 0, 1, 0, 1}. The PE is just the Shannon entropy of this string, i.e. -4/6(log(4/6)) - 2/6(log(2/6)) = 0.6365 Nats.
 
 #### Some things to note
