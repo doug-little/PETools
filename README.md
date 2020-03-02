@@ -87,9 +87,9 @@ The mean value of this distribution can be determined by expressing the logarith
 
 where E denotes the expectation value of the quantity inside the square brackets. The expectation of equation 1.1 then takes the form
 
-E[*H*<sub>est</sub>] = 1 - &alpha<sub>1</sub>E[&Delta;*q*<sub>*i*</sub>] - &alpha<sub>2</sub>E[(&Delta;*q*<sub>*i*</sub>)<sub>2</sub>] - ...
+E[*H*<sub>est</sub>] = 1 - \alpha<sub>1</sub>E[&Delta;*q*<sub>*i*</sub>] - &alpha<sub>2</sub>E[(&Delta;*q*<sub>*i*</sub>)<sub>2</sub>] - ...
 
-To a first approximation the expectation becomes [4]
+To a first approximation the expectation becomes [4];
 
 (1.4) E[*H*<sub>est</sub>] = 1 - (*D*!-1)/(2*N*log(*D*!)).
 
