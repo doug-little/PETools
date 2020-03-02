@@ -69,6 +69,14 @@ A further useful user parameter is the *embedding delay* which is defined as the
 
 Aside from probing patterns at different scales, using a larger embedding delay can be beneficial for data sets exhibiting strong short-range correlations. Oversampled data (where the sample rate exceeds the bandwidth of the system producing the output) commonly exhibits these correlations, and so it is useful in such circumstances to set &tau; to a higher value, so that the effective sampling rate matches the system bandwidth; in effect, removing these strong short-range correlations, which can lead to correlations in the resultant symbol string that can mask other significant behaviours.
 
+## 3. PE statistics for iid-distributed symbols
+
+The data analysis procedure outlined thus far involved taking an ordinal data set, breaking it up into subsets and assigning each subset a label (which we will hereafter refer to as a *symbol*) based on the positional order (or *index*) of each element within the subset going from lowest to highest or vice versa. As a side point: the actual symbol labels are completely interchangable. In fact, a property of permutation entropy (or any statistic derived from the categorisation of subsets in this fashion) is invariance under interchanges of labels. It is useful to include some kind of iterator in the labels for notational convenience, labels of the form &pi;<sub>*i*</sub> are popular in the literature. 
+
+In statistics parlance, "iid" is a standard abbreviation that stands for *independent and identically-distributed*. *Independent* here means that the probabilities (labelled *P*<sub>*i*</sub>) of observing different symbols remain invariant over all subsets, and do not depend on previous observations. Taking symbols to iid is a strong approximation that greatly simplifies statistical analysis, however a note of caution for the user - real data sets are *rarely* iid. Nonetheless, looking at the iid case is a useful starting point, and in some circumstances, a meaningful limit case.
+
+
+
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
