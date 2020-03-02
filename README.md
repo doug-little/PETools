@@ -81,14 +81,23 @@ Gaussian white noise is defined as a set of uncorrelated samples drawn from a st
 
 Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below (*D* = 3, *N* = 10,000).
 
-The properties of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
+The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
 
 (1.3) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
 
-where E denotes the expectation value of the quantity inside the square brackets.
+where E denotes the expectation value of the quantity inside the square brackets. The expectation of equation 1.1 then takes the form
+
+E[*H*<sub>est</sub>] = 1 - &alpha<sub>1</sub>E[&Delta;*q*<sub>*i*</sub>] - &alpha<sub>2</sub>E[(&Delta;*q*<sub>*i*</sub>)<sub>2</sub>] - ...
+
+To a first approximation the expectation becomes [4]
+
+(1.4) E[*H*<sub>est</sub>] = 1 - (*D*!-1)/(2*N*log(*D*!)).
+
+The expectation of the distribution of *H*<sub>est</sub> can be viewed as the "true" *H* minus a deviation term. The presence of this deviation term is indicative of the fact that equation 1.1 is a biased estimator. For our above example of (*D* = 3, *N* = 10,000), the deviation term calculated in equation 1.4 agrees with the numerical mean to within a few percent.
 
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
 2. C.E. Shannon, W. Weaver, The Mathematical Theory of Communication (1949), Univ of Illinois Press.
-3. D.J. Little, D. M. Kane, Phys. Rev. E 95, 052126 (2017).
+3. D.J. Little, D.M. Kane, Phys. Rev. E 95, 052126 (2017).
+4. D.J. Little, D.M. Kane, Phys. Rev. E 94, 022118 (2016).
