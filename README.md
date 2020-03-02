@@ -70,12 +70,22 @@ A further useful user parameter is the *embedding delay* which is defined as the
 Aside from probing patterns at different scales, using a larger embedding delay can be beneficial for data sets exhibiting strong short-range correlations. Oversampled data (where the sample rate exceeds the bandwidth of the system producing the output) commonly exhibits these correlations, and so it is useful in such circumstances to set &tau; to a higher value, so that the effective sampling rate matches the system bandwidth; in effect, removing these strong short-range correlations, which can lead to correlations in the resultant symbol string that can mask other significant behaviours.
 
 ## 3. PE statistics for iid-distributed symbols
-
 The data analysis procedure outlined thus far involved taking an ordinal data set, breaking it up into subsets and assigning each subset a label (which we will hereafter refer to as a *symbol*) based on the positional order (or *index*) of each element within the subset going from lowest to highest or vice versa. As a side point: the actual symbol labels are completely interchangable. In fact, a property of permutation entropy (or any statistic derived from the categorisation of subsets in this fashion) is invariance under interchanges of labels. It is useful to include some kind of iterator in the labels for notational convenience, labels of the form &pi;<sub>*i*</sub> are popular in the literature. 
 
-In statistics parlance, "iid" is a standard abbreviation that stands for *independent and identically-distributed*. *Independent* here means that the probabilities (labelled *P*<sub>*i*</sub>) of observing different symbols remain invariant over all subsets, and do not depend on previous observations. Taking symbols to iid is a strong approximation that greatly simplifies statistical analysis, however a note of caution for the user - real data sets are *rarely* iid. Nonetheless, looking at the iid case is a useful starting point, and in some circumstances, a meaningful limit case.
+In statistics parlance, "iid" is a standard abbreviation that stands for *independent and identically-distributed*. *Independent* here means that the probabilities (labelled *P*<sub>*i*</sub>) of observing different symbols remain invariant over all subsets, and do not depend on previous observations. It **does not** mean that the original ordinal data set contains iid elements. Taking symbols to iid is a strong approximation that greatly simplifies statistical analysis, however a note of caution for the user - real data sets are *rarely* iid. Nonetheless, looking at the iid case is a useful starting point, and in some circumstances, a meaningful limit case.
 
+Note too that allowing data subsets to contain overlapping element renders any iid assumptions invalid for obvious reasons. If two data subsets share elements, they cannot be regarded as independent, hence why it is generally recommended not to have these subsets overlap.
 
+### PE of Gaussian white noise
+Gaussian white noise is defined as a set of uncorrelated samples drawn from a standard Gaussian distribution. For the purposes of PE analysis, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal.
+
+Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below (*D* = 3, *N* = 10,000).
+
+The properties of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
+
+(1.3) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
+
+where E denotes the expectation value of the quantity inside the square brackets.
 
 
 #### References
