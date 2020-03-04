@@ -77,11 +77,11 @@ In statistics parlance, "iid" is a standard abbreviation that stands for *indepe
 Note too that allowing data subsets to contain overlapping element renders any iid assumptions invalid for obvious reasons. If two data subsets share elements, they cannot be regarded as independent, hence why it is generally recommended not to have these subsets overlap.
 
 ### PE of Gaussian white noise
-Gaussian white noise is defined as a set of uncorrelated samples drawn from a standard Gaussian distribution. For the purposes of PE analysis, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal.
+Gaussian white noise (GWN) is defined as a set of uncorrelated samples drawn from a standard Gaussian distribution. For the purposes of PE analysis, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal.
 
-Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below (*D* = 3, *N* = 10,000).
+Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below for 100,000 realisations of GWN (*D* = 3, *N* = 10,000).
 
-!(/Images/GWNPE.jpg)
+![PE distribution for 100,000 GWN realisations](/Images/GWNPE.jpg)
 
 The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
 
