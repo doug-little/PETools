@@ -83,6 +83,10 @@ Numerically however, it can be seen that the estimated PE for any finite set of 
 
 ![PE distribution for 100,000 GWN realisations](/Images/GWNPE.jpg)
 
+<p align="center">
+  <img width="100" height="100" src="/Images/GWNPE.jpg">
+</p>
+
 The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
 
 (1.3) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
