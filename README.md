@@ -91,7 +91,7 @@ The mean value of this distribution can be determined by expressing the logarith
 
 where E denotes the expectation value of the quantity inside the square brackets. Equation 1.1 then takes the form
 
-*H*<sub>est</sub> = 1 - &alpha;<sub>1</sub>&Delta;*q*<sub>*i*</sub><sup>2</sup> - &alpha;<sub>2</sub>(&Delta;*q*<sub>*i*</sub>)<sup>3</sup> - ...
+*H*<sub>est</sub> = 1 - &alpha;<sub>1</sub>&Delta;(*q*<sub>*i*</sub>)<sup>2</sup> - &alpha;<sub>2</sub>(&Delta;*q*<sub>*i*</sub>)<sup>3</sup> - ...
 
 To a first approximation, the expectation of equation [3] is
 
@@ -103,7 +103,7 @@ Instead, let us look at the *distribution* of PE values. The observed distributi
 
 (1.5) H = 1 - 1/(2*N*log(*D*!) * (1 - 1/*D*!) * &sum; *u*<sub>*i*</sub><sup>2</sup>,
 
-where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0. From equation 1.5 we can read off that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
+where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0). We can directly read off equation 1.5 that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
 
 
 #### References
