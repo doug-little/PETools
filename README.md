@@ -85,19 +85,25 @@ Numerically however, it can be seen that the estimated PE for any finite set of 
   <img width="560" height="400" src="/Images/GWNPE.jpg">
 </p>
 
-The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations*, defined as
+The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations* [4], defined as
 
 (1.3) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
 
-where E denotes the expectation value of the quantity inside the square brackets. The expectation of equation 1.1 then takes the form
+where E denotes the expectation value of the quantity inside the square brackets. Equation 1.1 then takes the form
 
-E[*H*<sub>est</sub>] = 1 - &alpha;<sub>1</sub>E[&Delta;*q*<sub>*i*</sub>] - &alpha;<sub>2</sub>E[(&Delta;*q*<sub>*i*</sub>)<sup>2</sup>] - ...
+*H*<sub>est</sub> = 1 - &alpha;<sub>1</sub>&Delta;*q*<sub>*i*</sub><sup>2</sup> - &alpha;<sub>2</sub>(&Delta;*q*<sub>*i*</sub>)<sup>3</sup> - ...
 
-To a first approximation the expectation becomes [4];
+To a first approximation, the expectation of equation [3] is
 
 (1.4) E[*H*<sub>est</sub>] = 1 - (*D*!-1)/(2*N*log(*D*!)).
 
-The expectation of the distribution of *H*<sub>est</sub> can be viewed as the "true" *H* minus a deviation term. The presence of this deviation term is indicative of the fact that equation 1.1 is a biased estimator. For our above example of (*D* = 3, *N* = 10,000), the deviation term calculated in equation 1.4 agrees with the numerical mean to within a few percent.
+This is derived from the fact that &Delta;*q*<sub>*i*</sub> (and p*<sub>*i*</sub>) are *multinomially distributed* variables, and that the second moment can be expressed as E[&Delta;*q*<sub>*i*</sub><sup>2</sup>] = p*<sub>*i*</sub>(1-p*<sub>*i*</sub> = *N*/*D*!(1-*N*/*D*!). The expectation of the distribution of *H*<sub>est</sub> can be viewed as the "true" *H* (i.e. 1) minus a deviation term. The presence of this deviation term is indicative of the fact that equation 1.1 is a biased estimator. For our above example of (*D* = 3, *N* = 10,000), the deviation term calculated in equation 1.4 agrees with the numerically calculted deviation to within a few percent. It is also possible to compute the variance in a similar fashion by truncating equating 1.4 and taking the expectation of the square, however this process is a little more involved, and so the reader is referred to [4] for details.
+
+Instead, let us look at the *distribution* of PE values. The observed distribution is very close to a *chi-squared* (&chi;<sup>2</sup>) distribution, except reflected, scaled and shifted compared to the standard &chi;<sup>2</sup> distribution. Is is not difficult to see however that the deviation term in equation 1.4 follows an orthodox, scaled &chi;<sup>2</sup> distribution. We can see how this emerges from equation 1.4 by considering that &chi;<sup>2</sup> distributions arise from the sum of squared, normally-distributed random variables. With some rearrangement, the first two terms of equation 1.3 can be expressed as
+
+(1.5) H = 1 - 1/(2*N*log(*D*!) * (1 - 1/*D*!) * &sum; *u*<sub>*i*</sub><sup>2</sup>,
+
+where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0. From equation 1.5 we can read off that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
 
 
 #### References
