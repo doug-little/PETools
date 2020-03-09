@@ -116,10 +116,7 @@ While Brownian noise is non-iid, the encoded symbol string that is produced via 
 
 Above is a histogram of estimated PEs from 100,000 realisations of Brownian noise with *D* = 3 and *N* = 3,333 as before. We know that the "true" PE of this system is -1/log(6)(0.5log(1/8) + 0.5log(1/4)) = 0.96713 (to 5 decimal places). The mean of the above distribution is 0.96672 = 0.96713 - 1/2/3,333/log(6) = 0.96713 - 0.00042, and so is consistent with equation 1.4.
 
-A natural question that arises at this point is "can we distinguish between white noise and Brownian noise through the PE"? The answer is unquestionably yes, in fact, we can do this without computing the PE at all - we'd only need to count the instances of each pattern. Distinguishing things via PE is nontheless useful because it reduces a multi-dimensional problem to a 1D one. The next question is "with what certainty?", which taps into the notion of *inference*. 
-
-### PE of Fractal noise
-Fractal noise (often referred to as *Pink noise*) is an interesting intermediate case between GWN and Brownian noise. 
+A natural question that arises at this point is "can we distinguish between white noise and Brownian noise through the PE"? The answer is unquestionably yes, in fact, we can do this without computing the PE at all - we'd only need to count the instances of each pattern. Distinguishing things via PE is nontheless useful because it reduces a multi-dimensional problem to a 1D one. The next question is "with what certainty?", which taps into the notion of *inference*. It is clear looking at the probability distributions above that they are well separated in that the difference in expectation values is well in excess of their combined standard deviations, however this is only true for noise series of this specific length (10,000 points, or 3,333 ordinal pattern subsets). Shorter data series will yield larger standard deviations, and so the ability to distinguish one from of noise from the other will be reduced. Conversely, more data points is usually favourable for the purpose of inference. We will look at inference testing in a bit more detail later.
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
