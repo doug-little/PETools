@@ -36,7 +36,7 @@ Finally, what if the length of the original data set does not neatly fit into gr
 ### Permutation Entropy
 In this section, we will take the ideas introduced in the previous section and place them on a firmer mathematical footing. The (normalised) permutation entropy (or just PE for short) is computed as
 
-(1.1) *H*<sub>est</sub>(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> (*p*<sub>*i*</sub>/*N*)log(*p*<sub>*i*</sub>/*N*)
+(2.1) *H*<sub>est</sub>(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> (*p*<sub>*i*</sub>/*N*)log(*p*<sub>*i*</sub>/*N*)
 
 where *D* is the embedding dimension, *N* denotes the total number of symbols, *p*<sub>*i*</sub> denote counts of the *i*th symbol, and the summation is over the complete set of symbols, *i* &isin; *s*. The symbols are assigned to each data subgroup based on which permutation of {1:*D*!} matches the condition
 
@@ -44,7 +44,7 @@ where *D* is the embedding dimension, *N* denotes the total number of symbols, *
 
 for the given group. Note here the subscripts refer to indices *within the subgroup*, not the indices of the original full data set.
 
-The "est" subscript in equation 1.1 denotes this to be an estimated PE, which will be discussed in the next section below. Note that as a consequence of the limit of *x*log(*x*) being 0 as *x* &rarr; 0, empty (zero) counts can be safely removed from the summation. It is noted explicitly that the PE is a funtion of the embedding dimension as well as *D*, as it is common in PE analysis to compute *H* as a function of *&\tau;*, though it should also be remarked that there is an overall dependence on how the data elements are mapped to the groups before encoding and things like e.g. whether there is overlap in sub-groupings are reliant on context, so it is imperative that these details are noted for the purposes of reproducibility.
+The "est" subscript in equation 2.1 denotes this to be an estimated PE, which will be discussed in the next section below. Note that as a consequence of the limit of *x*log(*x*) being 0 as *x* &rarr; 0, empty (zero) counts can be safely removed from the summation. It is noted explicitly that the PE is a funtion of the embedding dimension as well as *D*, as it is common in PE analysis to compute *H* as a function of *&\tau;*, though it should also be remarked that there is an overall dependence on how the data elements are mapped to the groups before encoding and things like e.g. whether there is overlap in sub-groupings are reliant on context, so it is imperative that these details are noted for the purposes of reproducibility.
 
 ### Interpretation of Permutation Entropy
 It is possible to define both the PE of the input ordinal data, and the PE of the machine/system that generated the ordinal data. The former is a *deterministic* interpretation, while the latter must be regarded as a *probabilistic* interpretation. Unfortunately, these two interpretations are often conflated in scientific literature.
@@ -53,9 +53,9 @@ The connection between the deterministic/probabilistic interpretations of PE is 
 
 The permuation entropy of the machine/system (hereafter referred to as the *true* permutation entropy) is given by
 
-(1.2) *H*(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> *P*<sub>*i*</sub>log(*P*<sub>*i*</sub>),
+(2.2) *H*(*D*,*&tau;*) = log(*D*!)<sup>-1</sup> &Sigma;<sub>s</sub> *P*<sub>*i*</sub>log(*P*<sub>*i*</sub>),
 
-which depend on *P*<sub>*i*</sub>, the *probability* of obtaining the symbol corresponding to the label *i*. Note that this is *not* equivalent to the formula above, since *p*<sub>*i*</sub>/*N* will not equal *P*<sub>*i*</sub> due to sampling error. Equation 1.1 is therefore an *estimator* for the "true" permutation entropy, equation 1.2. It is this nuance that many users fail to navigate, leading to errors in analysis. As PE is often used in inference testing e.g. to detect changes in the probabilistic output of a machine/system, knowing how to calculate the precision of a PE estimate is critical, especially in instances where the amount of available data is limited.
+which depend on *P*<sub>*i*</sub>, the *probability* of obtaining the symbol corresponding to the label *i*. Note that this is *not* equivalent to the formula above, since *p*<sub>*i*</sub>/*N* will not equal *P*<sub>*i*</sub> due to sampling error. Equation 2.1 is therefore an *estimator* for the "true" permutation entropy, equation 2.2. It is this nuance that many users fail to navigate, leading to errors in analysis. As PE is often used in inference testing e.g. to detect changes in the probabilistic output of a machine/system, knowing how to calculate the precision of a PE estimate is critical, especially in instances where the amount of available data is limited.
 
 ### Embedding Dimension
 The size of the subsets the ordinal data is divided into before the encoding step of the calculation. Incidentally, the name *permutation entropy* derives from the fact that each ordinal pattern (or *dynamical state*, to borrow the language used earlier) corresponds to a permutation of the string {1:D}, thus there are *D*! possible dynamic states to be summed over.
@@ -77,7 +77,7 @@ In statistics parlance, "iid" is a standard abbreviation that stands for *indepe
 Note too that allowing data subsets to contain overlapping element renders any iid assumptions invalid for obvious reasons. If two data subsets share elements, they cannot be regarded as independent, hence why it is generally recommended not to have these subsets overlap.
 
 ### PE of White noise
-White noise (GWN) is defined as a set of uncorrelated samples drawn from a distribution. Because PE is distribution-agnostic when it is applied to stochatsic data series, the distribution the noise samples are drawn from does not matter. Further, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal to 1/*D*!.
+White noise (GWN) is defined as a set of uncorrelated samples drawn from a distribution. Because PE is distribution-agnostic when it is applied to stochatsic data series, the distribution the noise samples are drawn from does not matter. Further, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 2.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal to 1/*D*!.
 
 Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below for 100,000 realisations of GWN (*D* = 3, *N* = 3,333).
 
@@ -85,25 +85,25 @@ Numerically however, it can be seen that the estimated PE for any finite set of 
   <img width="560" height="400" src="/Images/GWNPE.jpg">
 </p>
 
-The mean value of this distribution can be determined by expressing the logarithm term in equation 1.1 as a Taylor series expansion of *count deviations* [4], defined as
+The mean value of this distribution can be determined by expressing the logarithm term in equation 2.1 as a Taylor series expansion of *count deviations* [4], defined as
 
-(1.3) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
+(3.1) &Delta;*q*<sub>*i*</sub> = *Np*<sub>*i*</sub> - E[*Np*<sub>*i*</sub>],
 
-where E denotes the expectation value of the quantity inside the square brackets. Equation 1.1 then takes the form
+where E denotes the expectation value of the quantity inside the square brackets. Equation 2.1 then takes the form
 
 *H*<sub>est</sub> = 1 - &alpha;<sub>1</sub>&Delta;(*q*<sub>*i*</sub>)<sup>2</sup> - &alpha;<sub>2</sub>(&Delta;*q*<sub>*i*</sub>)<sup>3</sup> - ...
 
 To a first approximation, the expectation of equation [3] is
 
-(1.4) E[*H*<sub>est</sub>] = 1 - (*D*!-1)/(2*N*log(*D*!)).
+(3.2) E[*H*<sub>est</sub>] = 1 - (*D*!-1)/(2*N*log(*D*!)).
 
-This is derived from the fact that &Delta;*q*<sub>*i*</sub> (and *p*<sub>*i*</sub>) are *multinomially distributed* variables, and that the second moment can be expressed as E[&Delta;*q*<sub>*i*</sub><sup>2</sup>] = *p*<sub>*i*</sub>(1-*p*<sub>*i*</sub>) = 1/*D*!(1-1/*D*!). The expectation of the distribution of *H*<sub>est</sub> can be viewed as the "true" *H* (i.e. 1) minus a deviation term. The presence of this deviation term is indicative of the fact that equation 1.1 is a biased estimator. For our above example of (*D* = 3, *N* = 10,000), the deviation term calculated in equation 1.4 agrees with the numerically calculted deviation to within a few percent. It is also possible to compute the variance in a similar fashion by truncating equating 1.4 and taking the expectation of the square, however this process is a little more involved, and so the reader is referred to [4] for details.
+This is derived from the fact that &Delta;*q*<sub>*i*</sub> (and *p*<sub>*i*</sub>) are *multinomially distributed* variables, and that the second moment can be expressed as E[&Delta;*q*<sub>*i*</sub><sup>2</sup>] = *p*<sub>*i*</sub>(1-*p*<sub>*i*</sub>) = 1/*D*!(1-1/*D*!). The expectation of the distribution of *H*<sub>est</sub> can be viewed as the "true" *H* (i.e. 1) minus a deviation term. The presence of this deviation term is indicative of the fact that equation 2.1 is a biased estimator. For our above example of (*D* = 3, *N* = 10,000), the deviation term calculated in equation 3.2 agrees with the numerically calculted deviation to within a few percent. It is also possible to compute the variance in a similar fashion by truncating equating 1.4 and taking the expectation of the square, however this process is a little more involved, and so the reader is referred to [4] for details.
 
-Instead, let us look at the *distribution* of PE values. The observed distribution is very close to a *chi-squared* (&chi;<sup>2</sup>) distribution, except reflected, scaled and shifted compared to the standard &chi;<sup>2</sup> distribution. Is is not difficult to see however that the deviation term in equation 1.4 follows an orthodox, scaled &chi;<sup>2</sup> distribution. We can see how this emerges from equation 1.4 by considering that &chi;<sup>2</sup> distributions arise from the sum of squared, normally-distributed random variables. With some rearrangement, the first two terms of equation 1.3 can be expressed as
+Instead, let us look at the *distribution* of PE values. The observed distribution is very close to a *chi-squared* (&chi;<sup>2</sup>) distribution, except reflected, scaled and shifted compared to the standard &chi;<sup>2</sup> distribution. Is is not difficult to see however that the deviation term in equation 3.2 follows an orthodox, scaled &chi;<sup>2</sup> distribution. We can see how this emerges from equation 3.2 by considering that &chi;<sup>2</sup> distributions arise from the sum of squared, normally-distributed random variables. With some rearrangement, the first two terms of equation 3.1 can be expressed as
 
-(1.5) H = 1 - 1/(2*N*log(*D*!) * (1 - 1/*D*!) * &sum; *u*<sub>*i*</sub><sup>2</sup>,
+(3.3) H = 1 - 1/(2*N*log(*D*!) * (1 - 1/*D*!) * &sum; *u*<sub>*i*</sub><sup>2</sup>,
 
-where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0). We can directly read off equation 1.5 that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
+where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0). We can directly read off equation 3.3 that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
 
 ### PE of Brownian noise
 Brownian noise (often referred to as *random walks*) in its discrete form is defined as noise whereby the difference in consecutive elements follows a GWN distribution. We can think of GWN as the *derivative* of Brownian noise in the continuous limit. Brownian noise as an example of a non-iid distribution, since the distribution of a given point depends on the sum of sample values that preceded it. Alternatively we say that it is *non-stationary*. Brownian noise is also an example of a *Markov* process, defined as a system where the output probability depends only on the previous state. Markov processes play an important role in statistics, as they describe processes with strong short-range correlations.
@@ -114,9 +114,26 @@ While Brownian noise is non-iid, the encoded symbol string that is produced via 
   <img width="560" height="400" src="/Images/BNPE.jpg">
 </p>
 
-Above is a histogram of estimated PEs from 100,000 realisations of Brownian noise with *D* = 3 and *N* = 3,333 as before. We know that the "true" PE of this system is -1/log(6)(0.5log(1/8) + 0.5log(1/4)) = 0.96713 (to 5 decimal places). The mean of the above distribution is 0.96672 = 0.96713 - 1/2/3,333/log(6) = 0.96713 - 0.00042, and so is consistent with equation 1.4.
+Above is a histogram of estimated PEs from 100,000 realisations of Brownian noise with *D* = 3 and *N* = 3,333 as before. We know that the "true" PE of this system is -1/log(6)(0.5log(1/8) + 0.5log(1/4)) = 0.96713 (to 5 decimal places). The mean of the above distribution is 0.96672 = 0.96713 - 1/2/3,333/log(6) = 0.96713 - 0.00042, and so is consistent with equation 3.2.
 
 A natural question that arises at this point is "can we distinguish between white noise and Brownian noise through the PE"? The answer is unquestionably yes, in fact, we can do this without computing the PE at all - we'd only need to count the instances of each pattern. Distinguishing things via PE is nontheless useful because it reduces a multi-dimensional problem to a 1D one. The next question is "with what certainty?", which taps into the notion of *inference*. It is clear looking at the probability distributions above that they are well separated in that the difference in expectation values is well in excess of their combined standard deviations, however this is only true for noise series of this specific length (10,000 points, or 3,333 ordinal pattern subsets). Shorter data series will yield larger standard deviations, and so the ability to distinguish one from of noise from the other will be reduced. Conversely, more data points is usually favourable for the purpose of inference. We will look at inference testing in a bit more detail later.
+
+### PE analysis using Bayesian methods
+
+To this point, we have looked at probability distributions by running repeated noise realisations over and over to build up a histogram. In other words, we computed the probability of obtaining *H*<sub>est</sub> from some known set of probabilities (with a corresponding "true* *H*). In statistics parlance, we computed *p*(*H*<sub>est</sub>|*H*), where the | symbol denotes a conditional probability, and is read as "the probability of observing *H*<sub>est</sub> given *H*".
+
+The problem with this approach is that *H* is often not known *a priori*, so trying to compute histograms is iffy at best. Thankfully Bayes' rule, given by
+
+(3.4) *p*(*A*|*B*) = *p*(*B*|*A*)*p*(*A*)/*p*(*B*),
+
+allows us to frame the problem in an alternative way. Instead of seeking the distribution of *H*<sub>est</sub> given some *H*, we instead seek to find the distribution of *H* given some *H*<sub>est</sub>, essentially flipping the problem on its head. The advantage of this approach (apart from being more intuitive, since *H* is the unknown thing we are looking to characterise), it does not require the generation of multiple data realisations. A single data set, with a single estimate of *H* is sufficient to generate the required probability distribution.
+
+Applying Bayes' rule in the context of PE, we set *A* to be the PE and *B* to be the vector of observed symbols, **O**. Examining each term in equation 3.4 in this context;
+* *p*(*H*|**O**) is called the *posterior distribution* and is the thing we want to calculate.
+* *p*(**O**|*H*) is called the *likelihood function*, since a) it is not a probability distribution as it is not normalised, and b) it expresses the relative probability (likelihood) of observing a string of symbols given some *H*.
+* *p*(*H*) is called the *prior distribution*, and is noteworthy in that it does not depend on **O** at all. It is the probability distribution of *H* *before* we have considered any data. It can seem counter-logical at first to sensibly define a probability distribution of this type. In Bayesian statistics probability distributions are interpreted as a "confidence of belief" rather than an expected frequency of appearance over many realisations, thus the prior distribution essentially codifies all prior information/expectations of what *H* is likely to be before any symbols are observed. The logic of prior distributions is a topic that inspires plenty of debate that we will not rehash here. Note though that it is often possible to set *p*(*H*) in such a way as to delegate all influence over the posterior distribution to the likelihood function (thus allowing the data to "speak for itself").
+* *p*(**O**) can be thought of as a normalising term that ensures that the RHS is a proper probability distribution.
+ 
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
