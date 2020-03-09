@@ -79,7 +79,7 @@ Note too that allowing data subsets to contain overlapping element renders any i
 ### PE of White noise
 White noise (GWN) is defined as a set of uncorrelated samples drawn from a distribution. Because PE is distribution-agnostic when it is applied to stochatsic data series, the distribution the noise samples are drawn from does not matter. Further, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal to 1/*D*!.
 
-Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below for 100,000 realisations of GWN (*D* = 3, *N* = 10,000).
+Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below for 100,000 realisations of GWN (*D* = 3, *N* = 3,333).
 
 <p align="center">
   <img width="560" height="400" src="/Images/GWNPE.jpg">
@@ -113,6 +113,10 @@ While Brownian noise is non-iid, the encoded symbol string that is produced via 
 <p align="center">
   <img width="560" height="400" src="/Images/BNPE.jpg">
 </p>
+
+Above is a histogram of estimated PEs from 100,000 realisations of Brownian noise with *D* = 3 and *N* = 3,333 as before. We know that the "true" PE of this system is -1/log(6)(0.5log(1/8) + 0.5log(1/4)) = 0.96713 (to 5 decimal places). The mean of the above distribution is 0.96672 = 0.96713 - 1/2/3,333/log(6) = 0.96713 - 0.00042, and so is consistent with equation 1.4.
+
+A natural question that arises at this point is "can we distinguish between white noise and Brownian noise through the PE"? The answer is unquestionably yes, in fact, we can do this without computing the PE at all - we'd only need to count the instances of each pattern. Distinguishing things via PE is nontheless useful because it reduces a multi-dimensional problem to a 1D one. The next question is "with what certainty?", which taps into the notion of *inference*. 
 
 ### PE of Fractal noise
 Fractal noise (often referred to as *Pink noise*) is an interesting intermediate case between GWN and Brownian noise. 
