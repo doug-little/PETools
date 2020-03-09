@@ -76,8 +76,8 @@ In statistics parlance, "iid" is a standard abbreviation that stands for *indepe
 
 Note too that allowing data subsets to contain overlapping element renders any iid assumptions invalid for obvious reasons. If two data subsets share elements, they cannot be regarded as independent, hence why it is generally recommended not to have these subsets overlap.
 
-### PE of Gaussian white noise
-Gaussian white noise (GWN) is defined as a set of uncorrelated samples drawn from a standard Gaussian distribution. For the purposes of PE analysis, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal.
+### PE of White noise
+White noise (GWN) is defined as a set of uncorrelated samples drawn from a distribution. Because PE is distribution-agnostic when it is applied to stochatsic data series, the distribution the noise samples are drawn from does not matter. Further, we can consider the case where the mean is zero and the standard deviation is unity without loss of generality. It is straightforward to show that the "true" PE as defined by equation 1.2 is exactly 1 via symmetry arguments. Because the samples are uncorrelated, any order of points must be equally likely to any other order, thus *P*<sub>*i*</sub> must all be equal to 1/*D*!.
 
 Numerically however, it can be seen that the estimated PE for any finite set of white noise elements will almost never be 1. In fact, if the number of data subsets is not an even multiple of *D*!, the probability of *H*<sub>*est*</sub> = 1 is exactly zero. It is possible to rapidly simulate many realisations of Gaussian white noise, from which a *distribution* of estimated PEs can be constructed. An example of such a distribution is shown below for 100,000 realisations of GWN (*D* = 3, *N* = 10,000).
 
@@ -105,6 +105,13 @@ Instead, let us look at the *distribution* of PE values. The observed distributi
 
 where *u* is a random variable of unit variance and will converge to Gaussian random variables in the limit of large *N* (a general property of multinomially distributed variables). This corresponds to exactly *D*!-1 independent variables (the *D*!th variable is not considered independent, as it is constrained by the fact that the &sum;&Delta;*q*<sub>*i*</sub> = 0). We can directly read off equation 1.5 that the &chi;<sup>2</sup> distribution has *D*!-1 degrees of freedom and a *scale parameter* of 2*N*log(*D*!).
 
+### PE of Brownian noise
+Brownian noise (often referred to as *random walks*) in its discrete form is defined as noise whereby the difference in consecutive elements follows a GWN distribution. We can think of GWN as the *derivative* of Brownian noise in the continuous limit. Brownian noise as an example of a non-iid distribution, since the distribution of a given point depends on the sum of sample values that preceded it. Alternatively we say that it is *non-stationary*. Brownian noise is also an example of a *Markov* process, defined as a system where the output probability depends only on the previous state. Markov processes play an important role in statistics, as they describe processes with strong short-range correlations.
+
+While Brownian noise is non-iid, the encoded symbol string that is produced via ordinal analysis *is* iid. For *D* = 3, the set of probabilities is {1/4, 1/8, 1/8, 1/8, 1/8, 1/4}, which can be reasoned out by noting that there is always a 50% chance for a point to be greater than (or less than) the previous point. Thus the probability of obtaining patterns 1<2<3 and 3<2<1 is (1/2)<sup>2</sup>. The remaining probabilities must be equal by symmetry.
+
+### PE of Fractal noise
+Fractal noise (often referred to as *Pink noise*) is an interesting intermediate case between GWN and Brownian noise. 
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
