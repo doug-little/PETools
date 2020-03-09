@@ -110,6 +110,10 @@ Brownian noise (often referred to as *random walks*) in its discrete form is def
 
 While Brownian noise is non-iid, the encoded symbol string that is produced via ordinal analysis *is* iid. For *D* = 3, the set of probabilities is {1/4, 1/8, 1/8, 1/8, 1/8, 1/4}, which can be reasoned out by noting that there is always a 50% chance for a point to be greater than (or less than) the previous point. Thus the probability of obtaining patterns 1<2<3 and 3<2<1 is (1/2)<sup>2</sup>. The remaining probabilities must be equal by symmetry.
 
+<p align="center">
+  <img width="560" height="400" src="/Images/BNPE.jpg">
+</p>
+
 ### PE of Fractal noise
 Fractal noise (often referred to as *Pink noise*) is an interesting intermediate case between GWN and Brownian noise. 
 
