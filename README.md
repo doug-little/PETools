@@ -126,13 +126,25 @@ The problem with this approach is that *H* is often not known *a priori*, so try
 
 (3.4) *p*(*A*|*B*) = *p*(*B*|*A*)*p*(*A*)/*p*(*B*),
 
-allows us to frame the problem in an alternative way. Instead of seeking the distribution of *H*<sub>est</sub> given some *H*, we instead seek to find the distribution of *H* given some *H*<sub>est</sub>, essentially flipping the problem on its head. The advantage of this approach (apart from being more intuitive, since *H* is the unknown thing we are looking to characterise), it does not require the generation of multiple data realisations. A single data set, with a single estimate of *H* is sufficient to generate the required probability distribution.
+allows us to frame the problem in an alternative way. Instead of seeking the distribution of *H*<sub>est</sub> given some *H*, we instead seek to find the distribution of *H* given some *H*<sub>est</sub>, flipping the problem "on its head". The advantage of this approach (apart from being more intuitive, since *H* is the unknown thing we are looking to characterise), it does not require the generation of multiple data realisations. A single data set, with a single estimate of *H* is sufficient to generate the required probability distribution.
 
-Applying Bayes' rule in the context of PE, we set *A* to be the PE and *B* to be the vector of observed symbols, **O**. Examining each term in equation 3.4 in this context;
-* *p*(*H*|**O**) is called the *posterior distribution* and is the thing we want to calculate.
-* *p*(**O**|*H*) is called the *likelihood function*, since a) it is not a probability distribution as it is not normalised, and b) it expresses the relative probability (likelihood) of observing a string of symbols given some *H*.
-* *p*(*H*) is called the *prior distribution*, and is noteworthy in that it does not depend on **O** at all. It is the probability distribution of *H* *before* we have considered any data. It can seem counter-logical at first to sensibly define a probability distribution of this type. In Bayesian statistics probability distributions are interpreted as a "confidence of belief" rather than an expected frequency of appearance over many realisations, thus the prior distribution essentially codifies all prior information/expectations of what *H* is likely to be before any symbols are observed. The logic of prior distributions is a topic that inspires plenty of debate that we will not rehash here. Note though that it is often possible to set *p*(*H*) in such a way as to delegate all influence over the posterior distribution to the likelihood function (thus allowing the data to "speak for itself").
-* *p*(**O**) can be thought of as a normalising term that ensures that the RHS is a proper probability distribution.
+Examining each term in equation 3.4 in turn;
+* *p*(*A*|*B*) is called the *posterior distribution* and is the thing we want to calculate.
+* *p*(*B*|*A*) is called the *likelihood function*, since a) it is not a probability distribution as it is not normalised, and b) it expresses the relative probability (likelihood) of obtaining the observed *B* given some *A*.
+* *p*(*A*) is called the *prior distribution*, and is noteworthy in that it does not depend on *B* at all. It is the probability distribution of *A* *before* we have considered any observations. It can seem counter-logical at first to sensibly define a probability distribution of this type. In Bayesian statistics probability distributions are interpreted as a "confidence of belief" rather than an expected frequency of appearance over many realisations, thus the prior distribution essentially codifies all prior information/expectations of what *A* is likely to be before any symbols are observed. The logic of prior distributions is a topic that inspires plenty of debate that we will not rehash here. Note though that it is often possible to set *p*(*A*) in such a way as to delegate all influence over the posterior distribution to the likelihood function (thus allowing the data to "speak for itself").
+* *p*(*B*) can be thought of as a normalising term that ensures that the RHS is a proper probability distribution.
+
+To simplify the evaluation of the posterior distribution, it is common practice to assume a *conjugate prior* distribution in order to make the numerator in 3.4 more tractable. For this reason, we initially set *A* to **P** (the vector containing the marginal probabilities {*P*<sub>1</sub>,...,*P*<sub>*D*!</sub>} rather than *H*, because the likelihood function can't be expressed in a closed, analytic form. We set *B* to be **O**, the vector of symbols that have been observed. In this case, the likelihood function becomes
+
+(3.5) *p*(**O**|**P**) = &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>*ni*</sup>,
+
+where *ni* are the number of occurances of the *i*th symbol appearing in the vector **O** (thus *ni* are the *sufficient statistics*). It is important to reaffirm that the *P*<sub>*i*</sub> in equation 3.5 **are now variables**, not fixed/known quantities as in previous equations. Equation 3.5 arises from **P** being a multinomial distribution, and it is here that the iid assumption is important - if this assumption did not hold, then this would not be the correct likelihood function and *ni* would no longer be sufficient statistics for calculating the likelihood.
+
+For a likelihood function of this form, it is common to choose a prior in the form of a *Dirichlet* distribution, defined as
+
+(3.6) *p*(**P**) = (1/**B**)&prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*-1</sup>,
+
+where &alpha;*i* are the *hyperparameters* of the distribution. 
  
 
 #### References
