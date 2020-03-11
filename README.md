@@ -140,11 +140,15 @@ To simplify the evaluation of the posterior distribution, it is common practice 
 
 where *ni* are the number of occurances of the *i*th symbol appearing in the vector **O** (thus *ni* are the *sufficient statistics*). It is important to reaffirm that the *P*<sub>*i*</sub> in equation 3.5 **are now variables**, not fixed/known quantities as in previous equations. Equation 3.5 arises from **P** being a multinomial distribution, and it is here that the iid assumption is important - if this assumption did not hold, then this would not be the correct likelihood function and *ni* would no longer be sufficient statistics for calculating the likelihood.
 
-For a likelihood function of this form, it is common to choose a prior in the form of a *Dirichlet* distribution, defined as
+For a likelihood function of this form, it is common to choose a prior in the form of a *Dirichlet* distribution [5], defined as
 
 (3.6) *p*(**P**) = (1/**B**)&prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*-1</sup>,
 
-where &alpha;*i* are the *hyperparameters* of the distribution. 
+where &alpha;<sub>*i*</sub> are the *hyperparameters* of the distribution and **B** is the Beta function, a normalising factor which is commonly defined in terms of gamma functions as
+
+(3.7) **B** = &Gamma;(&alpha;<sub>1</sub>)...&Gamma;(&alpha;<sub>*D*!</sub>)/&Gamma;(&alpha;<sub>1</sub> + ... + &alpha;<sub>*D*!</sub>).
+
+
  
 
 #### References
@@ -152,3 +156,4 @@ where &alpha;*i* are the *hyperparameters* of the distribution.
 2. C.E. Shannon, W. Weaver, The Mathematical Theory of Communication (1949), Univ of Illinois Press.
 3. D.J. Little, D.M. Kane, Phys. Rev. E 95, 052126 (2017).
 4. D.J. Little, D.M. Kane, Phys. Rev. E 94, 022118 (2016).
+5. C. Bishop, Pattern Recognition and Machine Learning *Chapter 2*, Springer (2006).
