@@ -201,9 +201,17 @@ For completeness, we can utilise the approximations
 (3.17) &psi;(*x*) = log(*x*) - 1/2*x*
 (3.18) log(*x*+1) - log(*x*) = 2/(2*x*+1)
 
-to show this expression for E(*H*) converges to equation 3.2 in the limit of large *N*. With these approximations, equation 3.16 can be expressed as
+to show this expression for E(*H*) for the posterior distribution converges to equation 3.2 in the limit of large *N*. With these approximations, equation 3.16 can be expressed as
 
-(3.19) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (log(&alpha;<sub>i</sub>/&alpha;<sub>0</sub>) + 2/(2&alpha;<sub>i</sub>+1) - 1/(2&alpha;<sub>i</sub>+2) - 2/(2&alpha;<sub>0</sub>+1) + 1/(2&alpha;<sub>0</sub>+2)
+(3.19) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (log(&alpha;<sub>i</sub>/&alpha;<sub>0</sub>) + 2/(2&alpha;<sub>i</sub>+1) - 1/(2&alpha;<sub>i</sub>+2) - 2/(2&alpha;<sub>0</sub>+1) + 1/(2&alpha;<sub>0</sub>+2)).
+
+Equation 3.2 tacitly assumes a uniform prior distribution, so &alpha;<sub>*i*</sub> = *ni* and &alpha;<sub>0</sub> = *N*. Thus the first term in E(*H*) is just *H*<sub>est</sub>, and the remaining terms make up the deviation term. With some algebra, it is not too difficult to show that equation 3.19 in this limit becomes
+
+(3.20) E(*H*) = *H*<sub>est</sub> - 1/2*N*log(*D*!) &sum; 1 - *ni*/*D*!,
+
+which is equivalent to equation 3.2.
+
+#### Second Moment
 
 
 
