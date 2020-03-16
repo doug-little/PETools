@@ -150,9 +150,9 @@ where &alpha;<sub>*i*</sub> are the *hyperparameters* of the distribution and **
 
 The convenience of this prior is evident when examining its product with the likelihood function. This product is proportional to the posterior distribution, hence we can see that
 
-(3.8) p(**P**|**O**) &alpha; &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i* + *ni* -1</sup>.
+(3.8) p(**P**|**O**) &alpha; &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i* + *ni* -1</sup>,
 
-For this reason, the hyperparameters are interpreted as pseudo/equivalent observations of their respective symbols.
+which is another Dirichelt distributions, where the observations *ni* have been added to the hyperparameters. For this reason, the hyperparameters are interpreted as pseudo/equivalent observations of their respective symbols. Equation 3.8 is easily normalised by identifying the correct Beta function from the modified hyperparameters. 
 
 #### Calculating Moments of p(H)
 Although expressing distributions in terms of **P** is analytically convenient for the purposes of constructing the likelihood function and the prior, it is inconvenient for numerical computation due to the high dimensionality of **P**. It is thus desirable to perform numerical computations in *H* rather than **P**. One way to determine *p*(*H*) without directly invoking *p*(**P**) is through the calculation of *moments*.
@@ -169,7 +169,16 @@ The variance is the second *centralised* moment and **not** the ordinary (or *ra
 
 Here, we seek to exploit the fact that for variables on closed, finite intervals, the moments uniquely define the functional form of the probability distribution. This is known as the Hausdorff moment problem [6]. Although the number of moments is countably infinite, we can often compute a good approximation with only the lower order moments; analgous to truncating a Taylor series. The *n*th moment of *p*(*H*) is defined as
 
-(3.11) E(*H*<sup>*n*</sup>) = &int;<sub>0</sub><sup>1</sup> *H*<sup>*n*</sup> *p*(*H*) d*H*
+(3.11) E(*H*<sup>*n*</sup>) = &int;<sub>0</sub><sup>1</sup> *H*<sup>*n*</sup> *p*(*H*) d*H*.
+
+We can compute the moments of *p*(*H*) through a change of variable from *H* to **P**. Since probability distributions must remain normalised, expectations must be invariant under changes of variable, hence
+
+(3.12) E(*H*<sup>*n*</sup>) = &int;<sub>*S*</sub> *H*<sup>*n*</sup> *p*(**P**) d**P**,
+
+where *S* is the simplex defined by the condition &sum; *P*<sub>*i*</sub> = 1. Substituting the form of the prior/posterior in for *p*(**P**), we are now in a position to begin computing moments of the prior/posterior *p*(*H*). Because our judicious choice of prior resulted in the prior and posterior sharing the same form, they are tantamount to the same problem. Furthermore, the posterior distribution from one set of observations can be subsequently utlised as the prior distribution of the next set of observations with little difficulty.
+
+##### First Moment
+
 
  
 
