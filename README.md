@@ -178,7 +178,13 @@ We can compute the moments of *p*(*H*) through a change of variable from *H* to 
 where *S* is the simplex defined by the condition &sum; *P*<sub>*i*</sub> = 1. Substituting the form of the prior/posterior in for *p*(**P**), we are now in a position to begin computing moments of the prior/posterior *p*(*H*). Because our judicious choice of prior resulted in the prior and posterior sharing the same form, they are tantamount to the same problem. Furthermore, the posterior distribution from one set of observations can be subsequently utlised as the prior distribution of the next set of observations with little difficulty.
 
 ##### First Moment
+It can be seen from direct substitution of equation 2.2 into 3.12 for *H* we arrive at a series of integrals of the form
 
+(3.13) &int; 1/**B** log(*P*<sub>*i*</sub>) &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*+*kj*-1</sup>,
+
+where we have substituted the prior distribution (equation 3.6) for *p*(**P**). Here, *kj* is an index term that is 1 for *i* = *j* and 0 otherwise. The trick to solving these integrals is realising that the log terms can be eliminated by expressing the integrand as a derivative with respect to the &alpha; hyperparameters.
+
+(3.14) &int; 1/**B** &part;/&part;&alpha;<sub>*j*</sub> &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*+*kj*-1</sup>
 
  
 
