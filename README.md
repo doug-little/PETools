@@ -157,16 +157,19 @@ For this reason, the hyperparameters are interpreted as pseudo/equivalent observ
 #### Calculating Moments of p(H)
 Although expressing distributions in terms of **P** is analytically convenient for the purposes of constructing the likelihood function and the prior, it is inconvenient for numerical computation due to the high dimensionality of **P**. It is thus desirable to perform numerical computations in *H* rather than **P**. One way to determine *p*(*H*) without directly invoking *p*(**P**) is through the calculation of *moments*.
 
-In statistics, the *n*th moment w.r.t. some variable is defined as the expectation of the *n*th power of that variable, i.e.
+In statistics, the *n*th moment of a distribution of some variable is defined as the expectation of the *n*th power of the variable, i.e.
 
-(3.9) E(*x*<sup>n</sup>) = 1/*N* &sum *x*<sup>*n*</sup>*P*<sub>*x*</sub>,
+(3.9) E(*x*<sup>n</sup>) = 1/*N* &sum; *x*<sup>*n*</sup>*P*<sub>*x*</sub>,
 
-converging to an integral on the RHS in the case of a continuous variable where *P*<sub>*x*</sub> becomes *p*(*x*). For moments of second order or higher, it is common to also define a *centralised moment* where
+converging to an integral on the RHS in the case of a continuous variable where *P*<sub>*x*</sub> becomes *p*(*x*). For the sake of completeness, it is worth remarking that for moments of second order or higher, it is common to also define a *centralised moment* where
 
-(3.10) E((*x*-E(*x*))<sup>n</sup>) = 1/*N* &sum (*x*-E(*x*))<sup>*n*</sup>*P*<sub>*x*</sub>.
+(3.10) E((*x*-E(*x*))<sup>n</sup>) = 1/*N* &sum; (*x*-E(*x*))<sup>*n*</sup>*P*<sub>*x*</sub>.
 
 The variance is the second *centralised* moment and **not** the ordinary (or *raw*) second moment. Higher order centralised moments are the skewness (3rd centralised moment) and the kurtosis (4th centralised moment).
 
+Here, we seek to exploit the fact that for variables on closed, finite intervals, the moments uniquely define the functional form of the probability distribution. This is known as the Hausdorff moment problem [6]. Although the number of moments is countably infinite, we can often compute a good approximation with only the lower order moments; analgous to truncating a Taylor series. The *n*th moment of *p*(*H*) is defined as
+
+(3.11) E(*H*<sup>*n*</sup>) = &int;<sub>0</sub><sup>1</sup> *H*<sup>*n*</sup> *p*(*H*) d*H*
 
  
 
@@ -176,3 +179,4 @@ The variance is the second *centralised* moment and **not** the ordinary (or *ra
 3. D.J. Little, D.M. Kane, Phys. Rev. E 95, 052126 (2017).
 4. D.J. Little, D.M. Kane, Phys. Rev. E 94, 022118 (2016).
 5. C. Bishop, Pattern Recognition and Machine Learning *Chapter 2*, Springer (2006).
+6. F. Hausdorff, Math. Z 9, 74 (1921).
