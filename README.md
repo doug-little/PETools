@@ -199,6 +199,7 @@ where the summations are over the indices *i* = 1 to *D*!. Here, &psi; denotes t
 For completeness, we can utilise the approximations
 
 (3.17) &psi;(*x*) = log(*x*) - 1/2*x*
+
 (3.18) log(*x*+1) - log(*x*) = 2/(2*x*+1)
 
 to show this expression for E(*H*) for the posterior distribution converges to equation 3.2 in the limit of large *N*. With these approximations, equation 3.16 can be expressed as
