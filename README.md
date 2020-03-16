@@ -192,7 +192,18 @@ Exchanging the order of the derivative and integral allows these integrals to be
 
 which is equivalent to
 
-(3.16) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (&psi;(&alpha;<sub>i</sub> + 1) - &psi;(&alpha;<sub>*0*</sub> + 1))
+(3.16) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (&psi;(&alpha;<sub>i</sub> + 1) - &psi;(&alpha;<sub>*0*</sub> + 1)),
+
+where the summations are over the indices *i* = 1 to *D*!. Here, &psi; denotes the *digamma* function, which is available in most numerical computing libraries, meaning that the expectation of *p*(*H*) and *p*(*H*|**O**) can be rapidly computed knowing only the hyperparameters (which are typically user-defined) and the observation counts *ni*. With this approach, there is no need to numerically model anything directly in the **P** space.
+
+For completeness, we can utilise the approximations
+
+(3.17) &psi;(*x*) = log(*x*) - 1/2*x*
+(3.18) log(*x*+1) - log(*x*) = 2/(2*x*+1)
+
+to show this expression for E(*H*) converges to equation 3.2 in the limit of large *N*. With these approximations, equation 3.16 can be expressed as
+
+(3.19) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (log(&alpha;<sub>i</sub>/&alpha;<sub>0</sub>) + 2/(2&alpha;<sub>i</sub>+1) - 1/(2&alpha;<sub>i</sub>+2) - 2/(2&alpha;<sub>0</sub>+1) + 1/(2&alpha;<sub>0</sub>+2)
 
 
 
