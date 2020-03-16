@@ -188,7 +188,11 @@ where we have substituted the prior distribution (equation 3.6) for *p*(**P**). 
 
 Exchanging the order of the derivative and integral allows these integrals to be solved purely through the normalisation condition of the Dirichlet distribution. With some algebra, the first moment of the prior *p*(*H*) can be expressed as
 
-(3.15) E(*H*) = -1/log(*D*!) &sum; &Gamma;(&alpha;<sub>0</sub>)/&Gamma;(&alpha;<sub>*i*</sub>) &part;/&part;&alpha;<sub>*i*</sub> &Gamma;(&alpha;<sub>0</sub> + 1)/&Gamma;(&alpha;<sub>*i*</sub> + 1)
+(3.15) E(*H*) = -1/log(*D*!) &sum; &Gamma;(&alpha;<sub>0</sub>)/&Gamma;(&alpha;<sub>*i*</sub>) &part;/&part;&alpha;<sub>*i*</sub> &Gamma;(&alpha;<sub>0</sub> + 1)/&Gamma;(&alpha;<sub>*i*</sub> + 1),
+
+which is equivalent to
+
+(3.16) E(*H*) = -1/log(*D*!) &sum; &alpha;<sub>i</sub>/&alpha;<sub>0</sub> (&psi;(&alpha;<sub>i</sub> + 1) - &psi;(&alpha;<sub>*0*</sub> + 1))
 
 
 
