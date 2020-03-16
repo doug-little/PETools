@@ -148,6 +148,25 @@ where &alpha;<sub>*i*</sub> are the *hyperparameters* of the distribution and **
 
 (3.7) **B** = &Gamma;(&alpha;<sub>1</sub>)...&Gamma;(&alpha;<sub>*D*!</sub>)/&Gamma;(&alpha;<sub>1</sub> + ... + &alpha;<sub>*D*!</sub>).
 
+The convenience of this prior is evident when examining its product with the likelihood function. This product is proportional to the posterior distribution, hence we can see that
+
+(3.8) p(**P**|**O**) &alpha; &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i* + *ni* -1</sup>.
+
+For this reason, the hyperparameters are interpreted as pseudo/equivalent observations of their respective symbols.
+
+#### Calculating Moments of p(H)
+Although expressing distributions in terms of **P** is analytically convenient for the purposes of constructing the likelihood function and the prior, it is inconvenient for numerical computation due to the high dimensionality of **P**. It is thus desirable to perform numerical computations in *H* rather than **P**. One way to determine *p*(*H*) without directly invoking *p*(**P**) is through the calculation of *moments*.
+
+In statistics, the *n*th moment w.r.t. some variable is defined as the expectation of the *n*th power of that variable, i.e.
+
+(3.9) E(*x*<sup>n</sup>) = 1/*N* &sum *x*<sup>*n*</sup>*P*<sub>*x*</sub>,
+
+converging to an integral on the RHS in the case of a continuous variable where *P*<sub>*x*</sub> becomes *p*(*x*). For moments of second order or higher, it is common to also define a *centralised moment* where
+
+(3.10) E((*x*-E(*x*))<sup>n</sup>) = 1/*N* &sum (*x*-E(*x*))<sup>*n*</sup>*P*<sub>*x*</sub>.
+
+The variance is the second *centralised* moment and **not** the ordinary (or *raw*) second moment. Higher order centralised moments are the skewness (3rd centralised moment) and the kurtosis (4th centralised moment).
+
 
  
 
