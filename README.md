@@ -232,7 +232,7 @@ This procedure can be generalised to any higher order moment with some notationa
 
 (3.24) E(*H*<sup>*n*</sup>) = (-1/log(*D*!))<sup>*n*</sup> &sum; 1/**B** &int; &part;<sup>*n*</sup>/&part;**&alpha;**<sup>**K**</sup> &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*+*Kj*-1</sup> d**P**,
 
-where **K** is a *multi-index* where the sum of the index components (denoted |**K**|) is *n* for the *n*th moment. The summation in equation 3.24 is over all the possible **K** satisfying |**K**| = *n*. Here, &part;<sup>*n*</sup>/&part;**&alpha;**<sup>**K**</sup> is interpreted as the combined *Ki*th derivative with respect to &alpha;<sub>*i*</sup>. For example, a multinomial index of {3,0,0,0,0,0} (for *D* = 3) would correspond to taking the third derivative w.r.t. &alpha;<sub>*1*</sup>, {1,0,1,1,0,0} would correspond to &part;<sup>*3*</sup>/&part;&alpha;<sub>1</sub>&part;&alpha;<sub>3</sub>&part;&alpha;<sub>4</sub> and so on. Analytic expressions up to the fourth moment have been computed as part of this package.
+where **K** is a *multi-index* where the sum of the index components (denoted |**K**|) is *n* for the *n*th moment. The summation in equation 3.24 is over all the possible **K** satisfying |**K**| = *n*. Here, &part;<sup>*n*</sup>/&part;**&alpha;**<sup>**K**</sup> is interpreted as the combined *Ki*th derivative with respect to &alpha;<sub>*i*</sub>. For example, a multinomial index of {3,0,0,0,0,0} (for *D* = 3) would correspond to taking the third derivative w.r.t. &alpha;<sub>*1*</sub>, {1,0,1,1,0,0} would correspond to &part;<sup>*3*</sup>/&part;&alpha;<sub>1</sub>&part;&alpha;<sub>3</sub>&part;&alpha;<sub>4</sub> and so on. Analytic expressions up to the fourth moment have been computed as part of this package.
 
  
 
