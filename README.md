@@ -234,7 +234,16 @@ This procedure can be generalised to any higher order moment with some notationa
 
 where **K** is a *multi-index* where the sum of the index components (denoted |**K**|) is *n* for the *n*th moment. The summation in equation 3.24 is over all the possible **K** satisfying |**K**| = *n*. Here, &part;<sup>*n*</sup>/&part;**&alpha;**<sup>**K**</sup> is interpreted as the combined *Ki*th derivative with respect to &alpha;<sub>*i*</sub>. For example, a multinomial index of {3,0,0,0,0,0} (for *D* = 3) would correspond to taking the third derivative w.r.t. &alpha;<sub>*1*</sub>, {1,0,1,1,0,0} would correspond to &part;<sup>*3*</sup>/&part;&alpha;<sub>1</sub>&part;&alpha;<sub>3</sub>&part;&alpha;<sub>4</sub> and so on. Analytic expressions up to the fourth moment have been computed as part of this package.
 
- 
+## 4. PE statistics for non iid-distributed symbols
+It is important to re-iterate that everything in section 3 is applicable only when the observed symbols are iid. In this section, we will relax this requirement and look at cases where observed symbols may be non-iid. An important concept in this context is *correlation*. By definintion, iid data is uncorrelated (independent), so this is not something that needed considering in the previous section. In essence, correlation is the tendency for something to following another thing. You've probably heard of correlation in the context of determining relationships between quantities/variables; if changes in one variable tends to instigate change in another variable, they are said to be correlated.
+
+In the context of PE analysis, correlation and the tendency for one event to follow another can be summarised in terms of conditional probabilities. We encountered conditional probabilities in the previous section in the context of Bayesian analysis, where *p*(*X*|*Y*) is the probability of observing *X* given some observation *Y*. This can be applied to the observation of symbols as well. Most generally, we can express the probability of observing a symbol *S* in a non-iid system as *P*(*S*|**O**), where **O** denotes all the observations made up to the observation of *S*.
+
+Clearly *P*(*S*|**O**) defines an enormous-dimensional probability space, so it is normal to constrain **O** to a limited subset of prior observations. Obviously, the simplest approach is to constrain **O** to a single value. This defines a class of system known as a *Markovian* (or memory-less) system, where the next state/observation depends only on the current state/observation. We will assume for brevity that **O** is the prior observation, *S*<sub>i</sub> and we seek to characterise the probability of observing *S*<sub>i+1</sub>.
+
+
+
+
 
 #### References
 1. C. Bandt and B. Pompe, Phys. Rev. Lett. 88, 174102 (2002).
