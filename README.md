@@ -237,9 +237,24 @@ where **K** is a *multi-index* where the sum of the index components (denoted |*
 ## 4. PE statistics for non iid-distributed symbols
 It is important to re-iterate that everything in section 3 is applicable only when the observed symbols are iid. In this section, we will relax this requirement and look at cases where observed symbols may be non-iid. An important concept in this context is *correlation*. By definintion, iid data is uncorrelated (independent), so this is not something that needed considering in the previous section. In essence, correlation is the tendency for something to following another thing. You've probably heard of correlation in the context of determining relationships between quantities/variables; if changes in one variable tends to instigate change in another variable, they are said to be correlated.
 
-In the context of PE analysis, correlation and the tendency for one event to follow another can be summarised in terms of conditional probabilities. We encountered conditional probabilities in the previous section in the context of Bayesian analysis, where *p*(*X*|*Y*) is the probability of observing *X* given some observation *Y*. This can be applied to the observation of symbols as well. Most generally, we can express the probability of observing a symbol *S* in a non-iid system as *P*(*S*|**O**), where **O** denotes all the observations made up to the observation of *S*.
+In the context of PE analysis, correlation and the tendency for one event to follow another can be summarised in terms of conditional probabilities. We encountered conditional probabilities in the previous section in the context of Bayesian analysis, where *p*(*X*|*Y*) is the probability of observing *X* given some observation *Y*. This can be applied to the observation of symbols as well. Most generally, we can express the probability of observing a symbol *S* in a non-iid system as *P*(*S*|**O**), where **O** denotes all the observations made up to the observation of *S*. For iid systems *P*(*S*|**O**) = *P*(*S*), that is, prior observations have no influence over future probabilities.
 
 Clearly *P*(*S*|**O**) defines an enormous-dimensional probability space, so it is normal to constrain **O** to a limited subset of prior observations. Obviously, the simplest approach is to constrain **O** to a single value. This defines a class of system known as a *Markovian* (or memory-less) system, where the next state/observation depends only on the current state/observation. We will assume for brevity that **O** is the prior observation, *S*<sub>i</sub> and we seek to characterise the probability of observing *S*<sub>i+1</sub>.
+
+Under the Markov assumption, the probabilities associated with the different state transitions can be characterised as a *vector* of probability distributions, {**P**<sub>1</sub>,...,**P**<sub>*D*!</sub>}, where **P**<sub>*i*</sub> represents the probability distribution when *S*<sub>*i*</sub> is the *i*th symbol. Alternatively, they can be represented as a *matrix* where *P*<sub>*i*|*j*</sub> represents the probability of observing the *i*th symbol given the previous observation was the *j*th symbol. The vertical bar is included to distinguish it from the *joint* distribution *P*<sub>*ij*</sub>, which is the probability of observing an ith and jth symbol together in a pair of observations. In short, non-iid distributions require a higher-dimensional characterisation of the probabilities. 
+
+### PE analysis of overlapping subsets of white noise
+As an instructive exercise, let us now look at the effect of using overlapping subsets when dividing up our original ordinal data set. Recall that it was recommended not to allow these subsets to overlap as it introduces correlations in resultant symbol string. We will now analyse this effect for white noise data sets.
+
+Let us first consider the simple case where *D* = 2. There are two possible ordinal patterns, which we shall label subsets where *x*<sub>*i*</sub> < *x*<sub>*i+1*</sub> with the symbol "0" and *x*<sub>*i*</sub> > *x*<sub>*i+1*</sub> with the symbol "1" (remember, we rely on tiebreaking to avoid equalities). A clever way to determine the matrix of conditional probabilities is to decompose *D* = 3 inequalities into consecutive *D* = 2 inequalities like so;
+* {*x*<sub>1</sub> < *x*<sub>2</sub> < *x*<sub>3</sub>} ⇒ {*x*<sub>1</sub> < *x*<sub>2</sub>}, {*x*<sub>2</sub> < *x*<sub>3</sub>} = {0, 0}
+* {*x*<sub>1</sub> < *x*<sub>3</sub> < *x*<sub>2</sub>} ⇒ {*x*<sub>1</sub> < *x*<sub>2</sub>}, {*x*<sub>2</sub> > *x*<sub>3</sub>} = {0, 1}
+* {*x*<sub>2</sub> < *x*<sub>1</sub> < *x*<sub>3</sub>} ⇒ {*x*<sub>1</sub> > *x*<sub>2</sub>}, {*x*<sub>2</sub> < *x*<sub>3</sub>} = {1, 0}
+* {*x*<sub>2</sub> < *x*<sub>3</sub> < *x*<sub>1</sub>} ⇒ {*x*<sub>1</sub> > *x*<sub>2</sub>}, {*x*<sub>2</sub> < *x*<sub>3</sub>} = {1, 0}
+* {*x*<sub>3</sub> < *x*<sub>1</sub> < *x*<sub>2</sub>} ⇒ {*x*<sub>1</sub> < *x*<sub>2</sub>}, {*x*<sub>2</sub> > *x*<sub>3</sub>} = {0, 1}
+* {*x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub>} ⇒ {*x*<sub>1</sub> > *x*<sub>2</sub>}, {*x*<sub>2</sub> > *x*<sub>3</sub>} = {1, 1}
+
+
 
 
 
