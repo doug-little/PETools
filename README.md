@@ -254,6 +254,12 @@ Let us first consider the simple case where *D* = 2. There are two possible ordi
 * {*x*<sub>3</sub> < *x*<sub>1</sub> < *x*<sub>2</sub>} ⇒ {*x*<sub>1</sub> < *x*<sub>2</sub>}, {*x*<sub>2</sub> > *x*<sub>3</sub>} = {0, 1}
 * {*x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub>} ⇒ {*x*<sub>1</sub> > *x*<sub>2</sub>}, {*x*<sub>2</sub> > *x*<sub>3</sub>} = {1, 1}
 
+Since each of these six possibilities must be equal by symmetry, we can work out the conditional probabilities to be
+ **P**|0|1|
+---|---|---
+0|1/3|2/3
+1|2/3|1/3
+
 
 
 
