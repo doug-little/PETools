@@ -259,6 +259,7 @@ Since each of these six possibilities must be equal by symmetry, we can work out
 ---|---|---
 0|1/3|2/3
 1|2/3|1/3
+
 In words, we deduce that the likelihood of observing a "0" is twice as likely when the previous observation was a "1" than when the previous observation was a "0" and vice versa, a non-negligible effect! for *D* = 2 the conditional probabilities are nice and symmetric, and in fact, we can reduce this to an iid system through a second XOR encoding step, where "1" corresponds to a change in observed pattern and "0" if the pattern is repeated, which would mean that *P*<sub>0</sub> = 1/3 and *P*<sub>1</sub> = 2/3. Unfortunately this is generally not the case for higher *D*, as the following conditional probabilities for *D* = 3 shows
  **P**|0|1|2|3|4|5
 ---|---|---|---|---|---|---
@@ -268,6 +269,7 @@ In words, we deduce that the likelihood of observing a "0" is twice as likely wh
 3|13/20|3/20|4/20|3/20|8/20|9/20
 4|3/20|13/20|9/20|8/20|3/20|4/20
 5|6/20|6/20|8/20|11/20|6/20|3/20
+
 where the labels have been arranged such that the pairs {0,1}, {2,3} and {4,5} correspond to ordinal patterns with the same central index, i.e. *x*<sub>1</sub> < *x*<sub>2</sub> < *x*<sub>3</sub> and *x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub> are grouped in a pair.
 
 
