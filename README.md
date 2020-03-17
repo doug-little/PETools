@@ -213,9 +213,11 @@ Equation 3.2 tacitly assumes a uniform prior distribution, so &alpha;<sub>*i*</s
 which is equivalent to equation 3.2.
 
 #### Second Moment
+For the second moment, we must solve integrals of the form
 
+(3.21) 1/**B** &int; &part;<sup>2</sup>/&part;&alpha;<sub>*j*</sub><sup>2</sup> &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*+2*kj*-1</sup>.
 
-
+(3.22) 1/**B** &int; &part;<sup>2</sup>/&part;&alpha;<sub>*j*</sub>&part;&alpha;<sub>*m*</sub> &prod;<sub>*i*=1</sub><sup>*D*!</sup> *P*<sub>*i*</sub><sup>&alpha;*i*+*kj*+*km*-1</sup>.
  
 
 #### References
