@@ -260,7 +260,7 @@ Since each of these six possibilities must be equal by symmetry, we can work out
 0|1/3|2/3
 1|2/3|1/3
 
-In words, we deduce that the likelihood of observing a "0" is twice as likely when the previous observation was a "1" than when the previous observation was a "0" and vice versa, a non-negligible effect! for *D* = 2 the conditional probabilities are nice and symmetric, and in fact, we can reduce this to an iid system through a second XOR encoding step, where "1" corresponds to a change in observed pattern and "0" if the pattern is repeated, which would mean that *P*<sub>0</sub> = 1/3 and *P*<sub>1</sub> = 2/3. Unfortunately this is generally not the case for higher *D*, as the following conditional probabilities for *D* = 3 shows
+In words, we deduce that the likelihood of observing a "0" is twice as likely when the previous observation was a "1" than when the previous observation was a "0" and vice versa, a non-negligible effect! for *D* = 2 the conditional probabilities are nice and symmetric, and in fact, we can reduce this to an iid system through a second XOR encoding step, where "1" corresponds to a change in observed pattern and "0" if the pattern is repeated, which would mean that *P*<sub>0</sub> = 1/3 and *P*<sub>1</sub> = 2/3. For *D* > 2, the same procedure introduces correlations beyond the nearest neighbour (and so is non-Markovian), but we can marginalise over these longer-order correlations to obtain the Markovian conditional probabilities for *D* = 3, which are [3]
  **P**|0|1|2|3|4|5
 ---|---|---|---|---|---|---
 0|6/40|6/40|3/40|6/40|6/40|13/40
@@ -270,7 +270,22 @@ In words, we deduce that the likelihood of observing a "0" is twice as likely wh
 4|3/40|13/40|9/40|8/40|3/40|4/40
 5|6/40|6/40|8/40|11/40|6/40|3/40
 
-where the labels have been arranged such that the pairs {0,1}, {2,3} and {4,5} correspond to ordinal patterns with the same central index, i.e. *x*<sub>1</sub> < *x*<sub>2</sub> < *x*<sub>3</sub> and *x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub> are grouped in a pair. Perhaps surprisingly, the matrix of conditional probabilities is not symmetric and with a fair deal on non-trivial structure to it, so the simple tricks used to simplify the system for *D* = 2 don't work.
+where the labels have been arranged such that the pairs {0,1}, {2,3} and {4,5} correspond to ordinal patterns with the same central index, i.e. *x*<sub>1</sub> < *x*<sub>2</sub> < *x*<sub>3</sub> and *x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub> are grouped in a pair. Perhaps surprisingly, the matrix of conditional probabilities is not symmetric and with a fair deal on non-trivial structure to it, so the tricks used to simplify the system for *D* = 2 don't work in general.
+
+#### PE Mean
+It can be seen from the above example (by noting all rows sum to unity), that the marginal probabilities *P*<sub>*i*</sub> remain unchanged in the presence of added correlations. In fact, marginal probabilities can generally be thought of as the reduced probability representation when all the correlations have been averaged (or *marginalised*) out. In general though, the variance is *does* depend on the correlations between symbols as the following thought experiment illustrates.
+
+Imagine you have a system (for *D* = 2) where an observation of one symbol *guarantees* the next observation will be the alternate symbol. In this extreme case, the symbol string will read as "...01010101...". While the marginal probabilities are still the same as for an independent, unbiased system, the variance is absolutely not the same. In this specific case, the variance is completely minimised because the symbol string is deterministic. 
+
+Consider a second thought experiment, where instead of anticorrelation, the is a near-maximal *positive* correlation (where positive in this context is defined as the tendency for similar symbols to repeat). This would result in a symbol string that consisted of long runs of 0's and 1's, i.e. the symbol would only change rarely. Again, while the marginal probabilities would not change, the variance would become much larger compared to the independent case. Thus we conclude that positive correlations tend to yield higher variances, while negative (or anti-) correlations yield lower variances when compared to the independent case.
+
+We can articulate this in more quantitative terms by constructing a matrix that contains the variances and covariances of each *observation*. The diagonal terms contain the variances, while the off-diagonal terms contain the covariances.
+ **&Sigma;**|1|2|3|4|5|
+---|---|---|---|---|---
+0|&sigma;<sub>11</sub>|&sigma;<sub>12</sub>|0|0|0
+1|&sigma;<sub>21</sub>|&sigma;<sub>22</sub>|&sigma;<sub>23</sub>|0|0
+2|0|&sigma;<sub>32</sub>|&sigma;<sub>33</sub>|&sigma;<sub>34</sub>|0
+3|0|0|&sigma;<sub>43</sub>|&sigma;<sub>44</sub>|&sigma;<sub>45</sub>
 
 
 
