@@ -279,7 +279,9 @@ Imagine you have a system (for *D* = 2) where an observation of one symbol *guar
 
 Consider a second thought experiment, where instead of anticorrelation, the is a near-maximal *positive* correlation (where positive in this context is defined as the tendency for similar symbols to repeat). This would result in a symbol string that consisted of long runs of 0's and 1's, i.e. the symbol would only change rarely. Again, while the marginal probabilities would not change, the variance would become much larger compared to the independent case. Thus we conclude that positive correlations tend to yield higher variances, while negative (or anti-) correlations yield lower variances when compared to the independent case.
 
-We can articulate this in more quantitative terms by constructing a matrix that contains the variances and covariances of each *observation*. The diagonal terms contain the variances, while the off-diagonal terms contain the covariances.
+We can articulate this in more quantitative terms by constructing a *symmetric* matrix that contains the variances and covariances of each *observation*. The diagonal terms contain the variances, while the off-diagonal terms contain the covariances. In the case of an independent system, only the diagonal terms are non-zero and correspond to the individual variance of the symbol, *P*<sub>*t*</sub>(1-*P*<sub>*i*</sub>), taken from the properties of the multinomial distribution. The total variance of each *symbol count* is then the sum of these individual variances, i.e. *NP*<sub>*i*</sub>(1-*P*<sub>*i*</sub>), or *P*<sub>*i*</sub>(1-*P*<sub>*i*</sub>) for the variance of the estimated probability term *P*<sub>i</sub>. 
+
+For a Markovian system, all the matrix entries are zero, except the main diagonal *and* the two immediate off-diagonals as shown below. 
  **&Sigma;**|1|2|3|4|5|
 ---|---|---|---|---|---
 0|&sigma;<sub>11</sub>|&sigma;<sub>12</sub>|0|0|0
@@ -287,6 +289,15 @@ We can articulate this in more quantitative terms by constructing a matrix that 
 2|0|&sigma;<sub>32</sub>|&sigma;<sub>33</sub>|&sigma;<sub>34</sub>|0
 3|0|0|&sigma;<sub>43</sub>|&sigma;<sub>44</sub>|&sigma;<sub>45</sub>
 
+Thus, in our matrix summation for a Markovian system, we need to include a covariance term (by symmetry, &sigma;<sub>*ij*</sub> = &sigma;<sub>*ji*</sub>). The covariance is defined in terms of marginal and conditional probabilities as
+
+(4.1) *P*<sub>*i*|*j*</sub> - *P*<sub>*i*</sub>*P*<sub>*j*</sub>,
+
+To compute the variance of &Delta;*p*<sub>*i*</sub>, set *i* = *j* and then perform the matrix summation and divide by *N*, to get the formula
+
+(4.2) var(&Delta;*P*<sub>*i*</sub>) = *P*<sub>*i*</sub>(1-*P*<sub>*i*</sub>) + 2*P*<sub>*i*</sub>(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)
+
+The conditional probability is the *i*th diagonal element of the *D*-by-*D* conditional probability matrix. It can be seen that if the conditional probability exceeds the corresponding marginal probability, this corresponds to a positive correlation, and this yields an increase in the variance (and vice versa) as anticipated from our thought experiments above. When there is no correlation, then the conditional probability = the marginal probability and the second term becomes zero as expected. Thus equation 4.2 is a generalisation of the variance formula for a Markovian Multinomial system, which we will now utilise to compute the mean of the PE distribution.
 
 
 
