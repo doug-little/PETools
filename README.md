@@ -299,9 +299,13 @@ To compute the variance of &Delta;*p*<sub>*i*</sub>, set *i* = *j* and then perf
 
 The conditional probability is the *i*th diagonal element of the *D*-by-*D* conditional probability matrix. It can be seen that if the conditional probability exceeds the corresponding marginal probability, this corresponds to a positive correlation, and this yields an increase in the variance (and vice versa) as anticipated from our thought experiments above. When there is no correlation, then the conditional probability = the marginal probability and the second term becomes zero as expected. Thus equation 4.2 is a generalisation of the variance formula for a Markovian multinomial system, which we will now utilise to compute the mean of the PE distribution.
 
-A more compact 
+As the expectation values of &Delta;*P*<sub>*i*</sub> are 0 by definition, we can equate the second moments of &Delta;*P*<sub>*i*</sub> to their variances. Substituting equation 4.2 for the second moments of &Delta;*P*<sub>*i*</sub> in the Taylor series expansion of E[H] yields a modified version of equation 3.2
 
+(4.3) E[*H*<sub>est</sub>] = 1 - 1/(2*N*log(*D*!)) &Sum; &gamma;<sub>*i*</sub>(1-*P*<sub>*i*</sub>)
 
+where
+
+(4.4) &gamma<sub>*i*</sub> = 1 + 2*P*<sub>*i*</sub>(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>)
 
 
 
