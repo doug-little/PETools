@@ -305,7 +305,7 @@ As the expectation values of &Delta;*P*<sub>*i*</sub> are 0 by definition, we ca
 
 where
 
-(4.4) &gamma<sub>*i*</sub> = 1 + 2*P*<sub>*i*</sub>(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>)
+(4.4) &gamma;<sub>*i*</sub> = 1 + 2(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>)
 
 
 
