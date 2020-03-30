@@ -272,7 +272,6 @@ In words, we deduce that the likelihood of observing a "0" is twice as likely wh
 
 where the labels have been arranged such that the pairs {0,1}, {2,3} and {4,5} correspond to ordinal patterns with the same central index, i.e. *x*<sub>1</sub> < *x*<sub>2</sub> < *x*<sub>3</sub> and *x*<sub>3</sub> < *x*<sub>2</sub> < *x*<sub>1</sub> are grouped in a pair. Perhaps surprisingly, the matrix of conditional probabilities is not symmetric and with a fair deal on non-trivial structure to it, so the tricks used to simplify the system for *D* = 2 don't work in general.
 
-#### PE Mean
 It can be seen from the above example (by noting all rows sum to unity), that the marginal probabilities *P*<sub>*i*</sub> remain unchanged in the presence of added correlations. In fact, marginal probabilities can generally be thought of as the reduced probability representation when all the correlations have been averaged (or *marginalised*) out. In general though, the variance is *does* depend on the correlations between symbols as the following thought experiment illustrates.
 
 Imagine you have a system (for *D* = 2) where an observation of one symbol *guarantees* the next observation will be the alternate symbol. In this extreme case, the symbol string will read as "...01010101...". While the marginal probabilities are still the same as for an independent, unbiased system, the variance is absolutely not the same. In this specific case, the variance is completely minimised because the symbol string is deterministic. 
@@ -305,7 +304,9 @@ As the expectation values of &Delta;*P*<sub>*i*</sub> are 0 by definition, we ca
 
 where
 
-(4.4) &gamma;<sub>*i*</sub> = 1 + 2(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>)
+(4.4) &gamma;<sub>*i*</sub> = 1 + 2(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>).
+
+Clearly, &gamma;<sub>*i*</sub> is 1 for an independent system. We can adopt a similar approach to determine the variance of *H*<sub>*est*</sub> by adapting equation 4.1 to find the covariance of successive observations.
 
 
 
