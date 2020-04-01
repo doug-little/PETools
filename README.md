@@ -2,7 +2,7 @@
 Tools to analyse and visualise ordinal data using Permutation Entropy
 
 ## Installation
-Copy the Matlab (m) files to the desired Matlab directory. Ensure these files are present within Matlab's current directory when attempting to run.
+Copy the Matlab (m) files to the desired Matlab directory. Ensure these files are present within Matlab's current directory when attempting to run. Details of each function can be found in section 6.
 
 ## 1. Introduction
 Permutation entropy (PE) is a statistic applicable to ordered (indexed) data sets [1]. PE is similar to the Shannon entropy [2], except symbols are encoded based on the *relative ordering* of data values, rather than the data values themselves. Symbols are therefore interpreted as representations of *dynamical states* - or more colloquially, patterns made by neighbouring points. The PE therefore is a measure of how evenly represented these dynamical states are in a data set, or the level of predictability in the dynamical state of the probabilistic machine/system that produced the data.
@@ -310,6 +310,12 @@ where
 (4.4) &gamma;<sub>*i*</sub> = 1 + 2(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>).
 
 Clearly, &gamma;<sub>*i*</sub> is 1 for an independent system. We can adopt a similar approach to determine the variance of *H*<sub>*est*</sub> by adapting equation 4.1 to find the covariance of successive observations.
+
+### 6. PETool Functions
+In this section, the PETools functions will be described and explored.
+
+#### 6.1 OrdEncode
+Test data - LogisticTest.dat (Matlab)
 
 
 
