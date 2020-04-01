@@ -312,10 +312,39 @@ where
 Clearly, &gamma;<sub>*i*</sub> is 1 for an independent system. We can adopt a similar approach to determine the variance of *H*<sub>*est*</sub> by adapting equation 4.1 to find the covariance of successive observations.
 
 ### 6. PETool Functions
-In this section, the PETools functions will be described and explored.
 
 #### 6.1 OrdEncode
-Test data - LogisticTest.dat (Matlab)
+The `OrdEncode`(*y*, *D*, *&tau;*, Overlap) function takes ordinal data and returns an array of integers from 1 to *D*!, where each integer is a symbol representing a distinct ordinal patterns. *D* is the user-defined *embedding dimension* and must be an integer between 2 and 8. At least one *embedding delay* must be specified, and it must be a positive integer less than floor(len(y)/D). The integer string will group ordinal patterns calculated from indices with distinct mod(*&\tau;*) remainders, terminated by a "0" in each case. For example, if *&tau;* = 2, then the code will return [string1 0 string2 0] where string1 contains the integers encoded from data points with index mod(2) == 1 (i.e. the odd indices) and string2 contains the integers encoded from data points with index mod(2) == 0. 
+
+Multiple embedding dimensions can be specified in the form of a vector, in which case the function will return a cell array, with each cell containing an integer array corresponding to the embedding dimension.
+
+Finally, the user must specify whether or not to overlap data substrings with a logical value in the *Overlap* field. As stated above, it is recommended not to overlap patterns as it introduces correlations between ordinal patterns and weakens the validity of *iid* statistical assumptions.
+
+##### Test Outputs
+Test data - LogisticTest.mat, Matlab workspace containing a 1D array of logistic map outputs **A**, and the recursion factor, *r* = 3.8. This logistic map output was computed with an initial value of 0.5. The user can verify the correct functioning of the code with the following test cases;
+* OrdEncode(**A**,3,1,false) -> [4 4 4 5 5 2 4 4 5 4 ...]
+* OrdEncode(**A**,3,1,true) -> [4 5 1 4 5 1 4 2 4 5 ...]
+* OrdEncode(**A**,3,2,false) -> [2 6 6 2 5 2 2 6 4 2 ...]
+* OrdEncode(**A**,3,20,false) -> [2 4 2 2 6 6 3 5 2 4 ...]
+* OrdEncode(**A**,4,1,false) -> [14 19 14 19 4 9 21 12 12 14 ...]
+* OrdEncode(**A**,6,123,true) -> [436 587 611 131 277 371 517 667 67 133 ...]
+
+##### Memory Usage and Running Time
+The memory usage of `OrdEncode` scales with the size of the input ordinal data array. That is, an array twice the size will demand about twice the memory (for large files, this ignores smaller memory overheads). The rate of scaling depends on *D* and whether there is overlap in the data substrings. For no overlap and *D* = 3, the required memory is about 3 times the input data, while for no overlap and *D* = 5 it is about 4.5 times (in general, it is *D* - 1 + 3/*D* times). Overlapping increases the memory required by a factor of *D*. Memory usage is not affected by *&tau;*, as the script is looped (i.e. not vectorised) over these values.
+
+Approximate running times achieved with this script on a windows 10 (64-bit) i7-7500U 2.7 GHz CPU with 16 Gb of RAM;
+* OrdEncode(randn(1,1e3),3,1,false) -> 1 ms.
+* OrdEncode(randn(1,1e4),3,1,false) -> 3 ms.
+* OrdEncode(randn(1,1e5),3,1,false) -> 17 ms.
+* OrdEncode(randn(1,1e6),3,1,false) -> 200 ms.
+* OrdEncode(randn(1,1e7),3,1,false) -> 2.0 s.
+* OrdEncode(randn(1,1e6),4,1,false) -> 260 ms.
+* OrdEncode(randn(1,1e6),5,1,false) -> 450 ms.
+* OrdEncode(randn(1,1e6),5,1,true) -> 1.5 s.
+* OrdEncode(randn(1,1e6),6,1,false) -> 1.5 s.
+* OrdEncode(randn(1,1e6),6,1,true) -> 8.0 s.
+* OrdEncode(randn(1,1e6),7,1,false) -> 9.0 s.
+* OrdEncode(randn(1,1e6),7,1,true) -> 70.0 s.
 
 
 
