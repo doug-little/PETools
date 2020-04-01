@@ -1,6 +1,9 @@
 # PETools
 Tools to analyse and visualise ordinal data using Permutation Entropy
 
+## Installation
+Copy the Matlab (m) files to the desired Matlab directory. Ensure these files are present within Matlab's current directory when attempting to run.
+
 ## 1. Introduction
 Permutation entropy (PE) is a statistic applicable to ordered (indexed) data sets [1]. PE is similar to the Shannon entropy [2], except symbols are encoded based on the *relative ordering* of data values, rather than the data values themselves. Symbols are therefore interpreted as representations of *dynamical states* - or more colloquially, patterns made by neighbouring points. The PE therefore is a measure of how evenly represented these dynamical states are in a data set, or the level of predictability in the dynamical state of the probabilistic machine/system that produced the data.
 
