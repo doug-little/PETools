@@ -309,7 +309,9 @@ where
 
 (4.4) &gamma;<sub>*i*</sub> = 1 + 2(*P*<sub>*i|i*</sub>-*P*<sub>*i*</sub>)/(1-*P*<sub>*i*</sub>).
 
-Clearly, &gamma;<sub>*i*</sub> is 1 for an independent system. We can adopt a similar approach to determine the variance of *H*<sub>*est*</sub> by adapting equation 4.1 to find the covariance of successive observations.
+Clearly, &gamma;<sub>*i*</sub> is 1 for an independent system. For *D* = 2 in the case of white noise, we see that *P*<sub>*i|i*</sub> = 1/3 and *P*<sub>*i*</sub> = 0.5 for both patterns. Plugging into equation 4.4, we see that &gamma;<sub>*i*</sub> = 1/3, in other words, the variance of each pattern is 1/3 what we would expect in the absence of correlations, which in turn affects the correction imposed on the estimate for PE in equation 4.3. Had we incorrectly assumed things to be *iid*, our estimates would be out. 
+
+We can adopt a similar approach to determine the variance of *H*<sub>*est*</sub> by adapting equation 4.1 to find the covariance of successive observations.
 
 ### 6. PETool Functions
 
